@@ -82,13 +82,28 @@ int main(void)
   float sampleRate = 100;
   IMU_config(sampleRate);
 
+  // Initialise orientation variable
+  int16_t ovec[3];
+  uint8 ovecZero_partOne;
+  uint8 ovecZero_partTwo;
+  uint8 ovecOne_partOne;
+  uint8 ovecOne_partTwo;
+  uint8 ovecTwo_partOne;
+  uint8 ovecTwo_partTwo;
+  uint8 rssi;
+  uint8 minor_partOne;
+  uint8 minor_partTwo;
+  uint8 negativeZero = 0;
+  uint8 negativeOne = 0;
+  uint8 negativeTwo = 0;
+  uint8 adv_data_len = 12;
+  uint8 advertisment_data[12];
 
   while (1) {
 
 
-
 	  /**************************************************************************/
-	  /* Get IMU and RSSI data                                                          */
+	  /* Get IMU and RSSI data and stream to base station                       */
 	  /**************************************************************************/
 
 	  // Detect bluetooth events
@@ -105,6 +120,22 @@ int main(void)
         	gecko_cmd_le_gap_discover(2);
         	printf("\n\r");
         	printf("++++boot++++");
+        	gecko_cmd_le_gap_set_mode(le_gap_user_data, le_gap_undirected_connectable);
+
+            advertisment_data[0] = ovecZero_partOne;
+            advertisment_data[1] = ovecZero_partTwo;
+            advertisment_data[2] = ovecOne_partOne;
+            advertisment_data[3] = ovecOne_partTwo;
+            advertisment_data[4] = ovecTwo_partOne;
+            advertisment_data[5] = ovecTwo_partTwo;
+            advertisment_data[6] = rssi;
+            advertisment_data[7] = minor_partOne;
+            advertisment_data[8] = minor_partTwo;
+            advertisment_data[9] = negativeZero;
+            advertisment_data[10] = negativeOne;
+            advertisment_data[11] = negativeTwo;
+            gecko_cmd_le_gap_set_adv_data(0, adv_data_len, &advertisment_data);
+
         	break;
 
 
@@ -127,16 +158,28 @@ int main(void)
         // Get RSSI data
         case gecko_evt_le_gap_scan_response_id:
             {
-          	  i_data = &evt->data.evt_le_gap_scan_response.data.data;
-          	  if(i_data[25] == 0x03 && i_data[26] == 0x87){
-          		  printf("=============================================\r\n");
-          		          	  printf("ibeacon: %d %d %d \r\n", i_data[0], i_data[1], i_data[2]);
-          		          	  printf("major: %02x %02x \r\n", i_data[25], i_data[26]);
-          		          	  printf("minor: %02x %02x \r\n", i_data[27], i_data[28]);
-          		          	  printf("signal power: %d \r\n", i_data[29]);
-          		          	  printf("rssi: %d dB \r\n", i_data[29]-256);
-          		          	  printf("=============================================\r\n");
-          	  }
+            	i_data = &evt->data.evt_le_gap_scan_response.data.data;
+
+				struct gecko_msg_le_gap_scan_response_evt_t *pStatus;
+				pStatus = &(evt->data.evt_le_gap_scan_response);
+				uint8_t _rssi = pStatus->rssi;
+//				printf("BLE address %012x \r\n", pStatus->address);
+
+				if(i_data[25] == 0x03 && i_data[26] == 0x87){
+//					printf("=============================================\r\n");
+//					printf("ibeacon: %d %d %d \r\n", i_data[0], i_data[1], i_data[2]);
+//					printf("major: %02x %02x \r\n", i_data[25], i_data[26]);
+//					printf("minor: %02x %02x \r\n", i_data[27], i_data[28]);
+//					printf("rssi value: %d \r\n", _rssi);
+//					printf("rssi: %d dB \r\n", _rssi-256);
+//					printf("=============================================\r\n");
+
+					// Update advertisment data
+					rssi = (uint8)(_rssi);
+					minor_partOne = i_data[27];
+					minor_partTwo = i_data[28];
+				}
+
             }
             break;
 
@@ -147,9 +190,55 @@ int main(void)
         		case 1:
         			  // Get IMU orientation data
         			  IMU_update();
-        			  int16_t ovec[3];
         			  IMU_orientationGet(ovec);
-        			  //printf("\n\rOrientation Data: %d %d %d\n\r", ovec[0], ovec[1], ovec[2]);
+//        			  printf("\n\rOrientation Data: %d %d %d\n\r", ovec[0], ovec[1], ovec[2]);
+
+        			  // Turn signed int16 values into unsigned int8 values, and if they are negative set negative variable values to one (true)
+        			  if (ovec[0] < 0)
+        			  {
+        				  ovec[0] = -1*ovec[0];
+        				  negativeZero = 1;
+        			  }
+        			  if (ovec[1] < 0)
+        			  {
+        				  ovec[0] = -1*ovec[0];
+        				  negativeOne = 1;
+        			  }
+        			  if (ovec[2] < 0)
+        			  {
+        				  ovec[0] = -1*ovec[0];
+        				  negativeTwo = 1;
+        			  }
+
+//        			  printf("Which one is negative? %d %d %d \r\n", negativeZero, negativeOne, negativeTwo);
+
+        	    	  ovecZero_partOne = (ovec[0]>>8) & 0xff;
+        			  ovecZero_partTwo = ovec[0] & 0xff;
+        			  ovecOne_partOne = (ovec[1]>>8) & 0xff;
+        			  ovecOne_partTwo = ovec[1] & 0xff;
+        			  ovecTwo_partOne = (ovec[2]>>8) & 0xff;
+        			  ovecTwo_partTwo = ovec[2] & 0xff;
+
+        			  // Send advertisment
+        		      advertisment_data[0] = ovecZero_partOne;
+        		      advertisment_data[1] = ovecZero_partTwo;
+        		      advertisment_data[2] = ovecOne_partOne;
+        		      advertisment_data[3] = ovecOne_partTwo;
+        		      advertisment_data[4] = ovecTwo_partOne;
+        		      advertisment_data[5] = ovecTwo_partTwo;
+        		      advertisment_data[6] = rssi;
+        		      advertisment_data[7] = minor_partOne;
+        		      advertisment_data[8] = minor_partTwo;
+        	          advertisment_data[9] = negativeZero;
+        	          advertisment_data[10] = negativeOne;
+        	          advertisment_data[11] = negativeTwo;
+        		      gecko_cmd_le_gap_set_adv_data(0, adv_data_len, &advertisment_data);
+
+        		      // Reset negative variable values to zero (false)
+        		      negativeZero = 0;
+        		      negativeOne = 0;
+        		      negativeTwo = 0;
+
         			break;
 
         		default:

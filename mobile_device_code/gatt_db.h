@@ -39,10 +39,5 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 #define gattdb_imu_acceleration                78
 #define gattdb_imu_orientation                 81
 #define gattdb_imu_control_point               84
-#define gattdb_service_changed_char             3
-#define gattdb_device_name                      7
-#define gattdb_ota_control                     19
-#define gattdb_tx_power_level                  22
-#define gattdb_scan_interval_window            24
 
 #endif

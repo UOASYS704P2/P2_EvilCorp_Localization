@@ -7,6 +7,7 @@ Standard output
 ALL OK
 
 Error/Warning output
+WARNING: 2a00 max length attribute is 20 but actual value length is 14. 20 will be used.
 Warning: Generic Attribute Service should be the first service in GATT database. Otherwise its attribute handles may change when the database is updated in future.
 
 
