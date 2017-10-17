@@ -119,29 +119,30 @@ int main(void)
         	gecko_cmd_le_gap_set_scan_parameters(0x03E8,0x0064,0);
         	gecko_cmd_le_gap_discover(2);
         	printf("\n\r");
-        	printf("++++boot++++");
-        	gecko_cmd_le_gap_set_mode(le_gap_user_data, le_gap_undirected_connectable);
+        	printf("++++boot++++\r\n");
+//        	gecko_cmd_le_gap_set_mode(le_gap_user_data, le_gap_undirected_connectable);
+        	gecko_cmd_le_gap_set_mode(2, le_gap_undirected_connectable);
 
-            advertisment_data[0] = ovecZero_partOne;
-            advertisment_data[1] = ovecZero_partTwo;
-            advertisment_data[2] = ovecOne_partOne;
-            advertisment_data[3] = ovecOne_partTwo;
-            advertisment_data[4] = ovecTwo_partOne;
-            advertisment_data[5] = ovecTwo_partTwo;
-            advertisment_data[6] = rssi;
-            advertisment_data[7] = minor_partOne;
-            advertisment_data[8] = minor_partTwo;
-            advertisment_data[9] = negativeZero;
-            advertisment_data[10] = negativeOne;
-            advertisment_data[11] = negativeTwo;
-            gecko_cmd_le_gap_set_adv_data(0, adv_data_len, &advertisment_data);
+//            advertisment_data[0] = ovecZero_partOne;
+//            advertisment_data[1] = ovecZero_partTwo;
+//            advertisment_data[2] = ovecOne_partOne;
+//            advertisment_data[3] = ovecOne_partTwo;
+//            advertisment_data[4] = ovecTwo_partOne;
+//            advertisment_data[5] = ovecTwo_partTwo;
+//            advertisment_data[6] = rssi;
+//            advertisment_data[7] = minor_partOne;
+//            advertisment_data[8] = minor_partTwo;
+//            advertisment_data[9] = negativeZero;
+//            advertisment_data[10] = negativeOne;
+//            advertisment_data[11] = negativeTwo;
+//            gecko_cmd_le_gap_set_adv_data(0, adv_data_len, &advertisment_data);
 
         	break;
 
 
         case gecko_evt_le_connection_opened_id:
         	_conn_handle = evt->data.evt_le_connection_opened.connection;
-        	printf("++connected!!++");
+        	printf("++connected!!++\r\n");
         	break;
 
         case gecko_evt_le_connection_rssi_id:
@@ -154,6 +155,24 @@ int main(void)
             printf("%d",rssi_id);
             printf("\n\r");
             break;
+
+		// This event is activated whenever a read request is received through a bluetooth connection
+		case gecko_evt_gatt_server_user_read_request_id:
+			printf("Read request event received \r\n");
+			uint16 characteristic = evt->data.evt_gatt_server_user_read_request.characteristic;
+			uint8 att_errorcode = 0;
+			uint8 value_len = 6;
+			uint8 value_data[6];
+			value_data[0] = ovecZero_partOne;
+			value_data[1] = ovecZero_partTwo;
+			value_data[2] = ovecOne_partOne;
+			value_data[3] = ovecOne_partTwo;
+			value_data[4] = ovecTwo_partOne;
+			value_data[5] = ovecTwo_partTwo;
+			struct gecko_msg_gatt_server_send_user_read_response_rsp_t* response;
+			response = gecko_cmd_gatt_server_send_user_read_response(_conn_handle, characteristic, att_errorcode, value_len, &value_data);
+			printf("Sending response to read request: %04x", response->result);
+			break;
 
         // Get RSSI data
         case gecko_evt_le_gap_scan_response_id:
@@ -191,7 +210,7 @@ int main(void)
         			  // Get IMU orientation data
         			  IMU_update();
         			  IMU_orientationGet(ovec);
-//        			  printf("\n\rOrientation Data: %d %d %d\n\r", ovec[0], ovec[1], ovec[2]);
+        			  printf("\n\rOrientation Data: %d %d %d\n\r", ovec[0], ovec[1], ovec[2]);
 
         			  // Turn signed int16 values into unsigned int8 values, and if they are negative set negative variable values to one (true)
         			  if (ovec[0] < 0)
@@ -220,19 +239,19 @@ int main(void)
         			  ovecTwo_partTwo = ovec[2] & 0xff;
 
         			  // Send advertisment
-        		      advertisment_data[0] = ovecZero_partOne;
-        		      advertisment_data[1] = ovecZero_partTwo;
-        		      advertisment_data[2] = ovecOne_partOne;
-        		      advertisment_data[3] = ovecOne_partTwo;
-        		      advertisment_data[4] = ovecTwo_partOne;
-        		      advertisment_data[5] = ovecTwo_partTwo;
-        		      advertisment_data[6] = rssi;
-        		      advertisment_data[7] = minor_partOne;
-        		      advertisment_data[8] = minor_partTwo;
-        	          advertisment_data[9] = negativeZero;
-        	          advertisment_data[10] = negativeOne;
-        	          advertisment_data[11] = negativeTwo;
-        		      gecko_cmd_le_gap_set_adv_data(0, adv_data_len, &advertisment_data);
+//        		      advertisment_data[0] = ovecZero_partOne;
+//        		      advertisment_data[1] = ovecZero_partTwo;
+//        		      advertisment_data[2] = ovecOne_partOne;
+//        		      advertisment_data[3] = ovecOne_partTwo;
+//        		      advertisment_data[4] = ovecTwo_partOne;
+//        		      advertisment_data[5] = ovecTwo_partTwo;
+//        		      advertisment_data[6] = rssi;
+//        		      advertisment_data[7] = minor_partOne;
+//        		      advertisment_data[8] = minor_partTwo;
+//        	          advertisment_data[9] = negativeZero;
+//        	          advertisment_data[10] = negativeOne;
+//        	          advertisment_data[11] = negativeTwo;
+//        		      gecko_cmd_le_gap_set_adv_data(0, adv_data_len, &advertisment_data);
 
         		      // Reset negative variable values to zero (false)
         		      negativeZero = 0;
