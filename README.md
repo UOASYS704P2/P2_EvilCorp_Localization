@@ -1,9 +1,10 @@
 # P2_EvilCorp_Localization_System_Part1
 
-Compsys704 Project2 Code (Embedded system part).
+Compsys704 Project2 Embedded system Code.
 This repository includes two thunderboard sense projects: 1) mobile_devide project and 2) base_station project.
 
 Running Environment: Simplicity studio v4.
+Language: C
 
 How it works:
 Method 1:
