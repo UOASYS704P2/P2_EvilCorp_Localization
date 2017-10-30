@@ -12,7 +12,7 @@ git clone https://github.com/UOASYS704P2/ProjectWorkspace.git
 2)	Launch Simplicity studio v4 and import base_station_code and mobile_device_code.
 
 Method 2:
-You can also download the compressed files which are base_station_code.zip and mobile_device_code.zip to test the projects.
+Download the compressed files: base_station_code.zip and mobile_device_code.zip to test the projects.
 
 Due to the characteristics of simplicity studio, when building projects, the auto-generated files based on local system and hardware will cause conflicts when we pull and submit the updated code, so the whole project is submitted by one contributor kangguolong.
 The main contributors of this repository are Heather and Joy.
