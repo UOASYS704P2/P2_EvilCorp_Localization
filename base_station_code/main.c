@@ -144,38 +144,38 @@ void main(void) {
 	c_uuid.data[1]=0xf4;
 	c_uuid.data[0]=0x9a;
 
-	int i = 0;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 1;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 2;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 3;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 4;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 5;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 6;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 7;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 8;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 9;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 10;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 11;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 12;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 13;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 14;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
-	i = 15;
-	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	int i = 0;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 1;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 2;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 3;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 4;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 5;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 6;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 7;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 8;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 9;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 10;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 11;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 12;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 13;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 14;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
+//	i = 15;
+//	printf("Byte at index %d : %02x \r\n", i, c_uuid.data[i]);
 
 //	printf("Orientation UUID: \r\n");
 //	for(i=0; i < c_uuid.len; i++){
@@ -201,18 +201,18 @@ void main(void) {
 			{
 				struct gecko_msg_gatt_discover_characteristics_rsp_t * response1;
 				response1= gecko_cmd_gatt_discover_characteristics(_conn_handle, _handle_service);
-				printf("\n\r gecko_cmd_gatt_discover_characteristics: 0x%04x \n\r", response1->result);
+//				printf("\n\r gecko_cmd_gatt_discover_characteristics: 0x%04x \n\r", response1->result);
 				characteristicsDiscovered = true;
 				previousCommandFinished = false;
 			}
 		}
-		else if(!valueRead)
+		else
 		{
 			if (previousCommandFinished)
 			{
 				struct gecko_msg_gatt_read_characteristic_value_rsp_t* response;
 				response = gecko_cmd_gatt_read_characteristic_value(_conn_handle, characteristic_handle);
-				printf("\n\r gecko_cmd_gatt_read_characteristic_value: 0x%04x \n\r", response->result);
+//				printf("\n\r gecko_cmd_gatt_read_characteristic_value: 0x%04x \n\r", response->result);
 				previousCommandFinished = false;
 				valueRead = true;
 			}
@@ -224,8 +224,8 @@ void main(void) {
 		 * Here the system is set to start advertising immediately after boot procedure. */
 		case gecko_evt_system_boot_id:
 
-			printf("\r\n");
-			printf("===================Base Station Booting===================\r\n");
+//			printf("\r\n");
+//			printf("===================Base Station Booting===================\r\n");
 
 			//The smallest interval value supported is 328 which is around 10
 			//milliseconds, any parameters between 0 and 328 will be rounded
@@ -242,7 +242,7 @@ void main(void) {
 
 			struct gecko_msg_le_gap_open_rsp_t * response4;
 			response4 = gecko_cmd_le_gap_open(address1, 0);
-			printf("\n\r gecko_cmd_le_gap_open: 0x%04x \r\n", response4->result);
+//			printf("\n\r gecko_cmd_le_gap_open: 0x%04x \r\n", response4->result);
 
 //			gecko_cmd_le_gap_set_mode(le_gap_user_data,
 //					le_gap_undirected_connectable);
@@ -253,22 +253,22 @@ void main(void) {
 
 		case gecko_evt_gatt_service_id:
 			_handle_service = evt->data.evt_gatt_service.service;
-			printf("===================Get _handle_service==================\r\n");
-			printf("\r\n");
-			printf("service: %d", _handle_service);
-			printf("\r\n");
+//			printf("===================Get _handle_service==================\r\n");
+//			printf("\r\n");
+//			printf("service: %d", _handle_service);
+//			printf("\r\n");
 
 			_uuid = evt->data.evt_gatt_service.uuid;
-			printf("===================Get _uuid==================\r\n");
-			printf("\r\n");
-			printf("uuid len: %d", evt->data.evt_gatt_service.uuid.len);
-			printf("\r\n");
+//			printf("===================Get _uuid==================\r\n");
+//			printf("\r\n");
+//			printf("uuid len: %d", evt->data.evt_gatt_service.uuid.len);
+//			printf("\r\n");
 			uint8* uuid_value = evt->data.evt_gatt_service.uuid.data;
-			printf("data: %d ---- value: ");
-			for(int i=evt->data.evt_gatt_service.uuid.len-1; i > -1; i--){
-				printf("%02x ", evt->data.evt_gatt_service.uuid.data[i]);
-			}
-			printf("\r\n");
+//			printf("data: %d ---- value: ");
+//			for(int i=evt->data.evt_gatt_service.uuid.len-1; i > -1; i--){
+//				printf("%02x ", evt->data.evt_gatt_service.uuid.data[i]);
+//			}
+//			printf("\r\n");
 
 			/* Event structure */
 //			struct gecko_msg_gatt_service_evt_t
@@ -281,49 +281,61 @@ void main(void) {
 
 		case gecko_evt_gatt_procedure_completed_id:
 			_result = *&evt->data.evt_gatt_procedure_completed.result;;
-			printf("\n\r COMMAND COMPLETED!!: 0x%04x \n\r", _result);
-			printf("\r\n");
+//			printf("\n\r COMMAND COMPLETED!!: 0x%04x \n\r", _result);
+//			printf("\r\n");
 			previousCommandFinished = true;
 		break;
 
 		case gecko_evt_gatt_characteristic_id:
 			_uuid = *&evt->data.evt_gatt_characteristic.uuid;
-			printf("===================gecko_evt_gatt_characteristic_id==================\r\n");
-			printf("\r\n");
+//			printf("===================gecko_evt_gatt_characteristic_id==================\r\n");
+//			printf("\r\n");
 //			printf("data: %d ---- value: ");
 //			for(int i=evt->data.evt_gatt_characteristic.uuid.len-1; i > -1; i--){
 //				printf("%02x ", evt->data.evt_gatt_characteristic.uuid.data[i]);
 //			}
 
 			if(*evt->data.evt_gatt_characteristic.uuid.data == *c_uuid.data){ // note to self: add rest of elements
-				printf("\n\r\nOrientation Characteristic Found!!!\n\r\n");
+//				printf("\n\r\nOrientation Characteristic Found!!!\n\r\n");
 				characteristic_handle = evt->data.evt_gatt_characteristic.characteristic;
 			}
 
-			printf("\r\n");
+//			printf("\r\n");
 
 		break;
 
 		case gecko_evt_gatt_characteristic_value_id:
 			_handle_characteristic = *&evt->data.evt_gatt_characteristic_value.characteristic;
-			printf("===================Get _handle_characteristic==================\r\n");
-			printf("\r\n");
-			for(int i=evt->data.evt_gatt_characteristic_value.value.len - 1; i > -1; i--){
-				printf("%02x ", evt->data.evt_gatt_characteristic_value.value.data[i]);
-			}
-//			uint8array c_value = evt->data.evt_gatt_characteristic_value.value;
-//			val_data = c_value.data;
-//			printf("characteristic_value len: %d \r\n", c_value.len);
+//			printf("===================Get Data==================\r\n");
+//			for(int i=evt->data.evt_gatt_characteristic_value.value.len - 1; i > -1; i--){
+//				printf("%02x ", evt->data.evt_gatt_characteristic_value.value.data[i]);
+//			}
+//			printf("\r\n");
 
-//			struct gecko_msg_gatt_characteristic_value_evt_t
-//			{
-//			uint8 connection;,
-//			uint16 characteristic;,
-//			uint8 att_opcode;,
-//			uint16 offset;,
-//			uint8array value;
-//			};
-//			printf("characteristic_value ---------------------------- value:", val_data[0]);
+			// Testing conversion of two uint8s to one number
+			uint16_t ovecZero = ((uint16_t)evt->data.evt_gatt_characteristic_value.value.data[0] << 8) | evt->data.evt_gatt_characteristic_value.value.data[1];
+			uint16_t ovecOne = ((uint16_t)evt->data.evt_gatt_characteristic_value.value.data[2] << 8) | evt->data.evt_gatt_characteristic_value.value.data[3];
+			uint16_t ovecTwo = ((uint16_t)evt->data.evt_gatt_characteristic_value.value.data[4] << 8) | evt->data.evt_gatt_characteristic_value.value.data[5];
+			uint16_t xCoordinate = ((uint16_t)evt->data.evt_gatt_characteristic_value.value.data[6] << 8) | evt->data.evt_gatt_characteristic_value.value.data[7];
+			uint16_t yCoordinate = ((uint16_t)evt->data.evt_gatt_characteristic_value.value.data[8] << 8) | evt->data.evt_gatt_characteristic_value.value.data[9];
+
+			int16_t ovec0 = (int16_t)ovecZero;
+			int16_t ovec1 = (int16_t)ovecOne;
+			int16_t ovec2 = (int16_t)ovecTwo;
+
+			if (ovec0 < 0) {ovec0 = -1*ovec0;}
+			if (ovec1 < 0) {ovec1 = -1*ovec1;}
+			if (ovec2 < 0) {ovec2 = -1*ovec2;}
+
+			if (evt->data.evt_gatt_characteristic_value.value.data[10] == 1) {ovec0 = -1*ovec0;}
+			if (evt->data.evt_gatt_characteristic_value.value.data[11] == 1) {ovec1 = -1*ovec1;}
+			if (evt->data.evt_gatt_characteristic_value.value.data[12] == 1) {ovec2 = -1*ovec2;}
+
+//			printf("Values that should be negative: %d %d %d \n\r", evt->data.evt_gatt_characteristic_value.value.data[10], evt->data.evt_gatt_characteristic_value.value.data[11], evt->data.evt_gatt_characteristic_value.value.data[12]);
+//			printf("|---->Orientation data: %d %d %d \n\r", ovec0, ovec1, ovec2);
+//			printf("X coordinate: %d, Y coordinate: %d \n\r", xCoordinate, yCoordinate);
+			printf("{\"IMU\":\"%d,%d,%d\", \"Location\":\"%d,%d\"}\r\n", ovec0, ovec1, ovec2, xCoordinate, yCoordinate);
+
 		break;
 
 //		case gecko_evt_gatt_server_characteristic_status_id:
@@ -344,8 +356,13 @@ void main(void) {
 //		break;
 
 		case gecko_evt_le_connection_opened_id:
+
+//			printf("===================Awesome Device connected===================\r\n");
+
 			_conn_handle = evt->data.evt_le_connection_opened.connection;
-//			gecko_cmd_le_gap_set_mode(le_gap_user_data,le_gap_undirected_connectable);
+//
+
+			gecko_cmd_le_gap_set_mode(le_gap_user_data,le_gap_undirected_connectable);
 //			gecko_cmd_gatt_discover_characteristics(_conn_handle);
 
 //			struct gecko_msg_gatt_read_characteristic_value_rsp_t* results;
@@ -354,7 +371,7 @@ void main(void) {
 
 			struct gecko_msg_gatt_discover_primary_services_rsp_t * response3;
 			response3 = gecko_cmd_gatt_discover_primary_services(_conn_handle);
-			printf("\n\r gecko_cmd_gatt_discover_primary_services: 0x%04x \n\r", response3->result);
+//			printf("\n\r gecko_cmd_gatt_discover_primary_services: 0x%04x \n\r", response3->result);
 
 
 
@@ -367,13 +384,13 @@ void main(void) {
 			pStatus = &(evt->data.evt_le_connection_opened);
 			uint8_t addressType = pStatus->address_type;
 			bd_addr addr = pStatus->address;
-			printf("\n\r");
-			printf("===================Awesome Device connected===================\r\n");
-			printf("BLE address is: %02x:%02x:%02x:%02x:%02x:%02x  \r\n",
-					addr.addr[5],addr.addr[4],addr.addr[3],
-					addr.addr[2],addr.addr[1],addr.addr[0]);
-			printf("BLE address type %d \r\n", addressType);
-			printf("++ HHH ++");
+//			printf("\n\r");
+//			printf("===================Awesome Device connected===================\r\n");
+//			printf("BLE address is: %02x:%02x:%02x:%02x:%02x:%02x  \r\n",
+//					addr.addr[5],addr.addr[4],addr.addr[3],
+//					addr.addr[2],addr.addr[1],addr.addr[0]);
+//			printf("BLE address type %d \r\n", addressType);
+//			printf("++ HHH ++");
 
 		break;
 
@@ -386,9 +403,9 @@ void main(void) {
 				/* Restart advertising after client has disconnected */
 				gecko_cmd_le_gap_set_mode(le_gap_general_discoverable, le_gap_undirected_connectable);
 			}
-			printf("\n\r");
-			printf("DISCONNECTED!");
-			printf("\n\r");
+//			printf("\n\r");
+//			printf("DISCONNECTED!");
+//			printf("\n\r");
        break;
 
 //		case gecko_evt_le_connection_rssi_id: {
