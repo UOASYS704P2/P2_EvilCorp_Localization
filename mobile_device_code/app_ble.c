@@ -63,40 +63,40 @@ AppCfgGattServerUserReadRequest_t appCfgGattServerUserReadRequest[] =
   { 0, NULL }
 };
 
-AppCfgGattServerUserWriteRequest_t appCfgGattServerUserWriteRequest[] =
-{
-  { gattdb_es_control_point, esControlPointWrite },
-  { gattdb_iaq_control_point, iaqControlPointWrite },
-  { gattdb_ui_leds, uiLEDWrite },
-  { gattdb_ui_rgbleds, uiRGBLEDWrite },
-  { gattdb_aio_digital_out, aioDigitalOutWrite },
-  { gattdb_imu_control_point, imuControlPointWrite },
-  { 0, NULL }
-};
-
-AppCfgGattServerCharStatus_t appCfgGattServerCharStatus[] =
-{
-  { gattdb_batt_measurement, battCharStatusChange },
-  { gattdb_es_control_point, esControlPointChange },
-  { gattdb_iaq_control_point, iaqControlPointChange },
-  { gattdb_aio_digital_in, aioDigitalInCharStatusChange },
-  { gattdb_imu_acceleration, imuAccelerationStatusChange },
-  { gattdb_imu_orientation, imuOrientationStatusChange },
-  { gattdb_imu_control_point, imuControlPointStatusChange },
-  /*{ gattdb_ui_buttons,        uiButtonChange },*/
-  { 0, NULL }
-};
+//AppCfgGattServerUserWriteRequest_t appCfgGattServerUserWriteRequest[] =
+//{
+//  { gattdb_es_control_point, esControlPointWrite },
+//  { gattdb_iaq_control_point, iaqControlPointWrite },
+//  { gattdb_ui_leds, uiLEDWrite },
+//  { gattdb_ui_rgbleds, uiRGBLEDWrite },
+//  { gattdb_aio_digital_out, aioDigitalOutWrite },
+//  { gattdb_imu_control_point, imuControlPointWrite },
+//  { 0, NULL }
+//};
+//
+//AppCfgGattServerCharStatus_t appCfgGattServerCharStatus[] =
+//{
+//  { gattdb_batt_measurement, battCharStatusChange },
+//  { gattdb_es_control_point, esControlPointChange },
+//  { gattdb_iaq_control_point, iaqControlPointChange },
+//  { gattdb_aio_digital_in, aioDigitalInCharStatusChange },
+//  { gattdb_imu_acceleration, imuAccelerationStatusChange },
+//  { gattdb_imu_orientation, imuOrientationStatusChange },
+//  { gattdb_imu_control_point, imuControlPointStatusChange },
+//  /*{ gattdb_ui_buttons,        uiButtonChange },*/
+//  { 0, NULL }
+//};
 
 AppCfgGattServerConfirmation_t appCfgGattServerConfirmation[] =
 {
   { 0, NULL }
 };
 
-size_t appCfgGattServerAttributeValueSize   = COUNTOF(appCfgGattServerAttributeValue) - 1;
-size_t appCfgGattServerUserReadRequestSize  = COUNTOF(appCfgGattServerUserReadRequest) - 1;
-size_t appCfgGattServerUserWriteRequestSize = COUNTOF(appCfgGattServerUserWriteRequest) - 1;
-size_t appCfgGattServerCharStatusSize       = COUNTOF(appCfgGattServerCharStatus) - 1;
-size_t appCfgGattServerConfirmationSize     = COUNTOF(appCfgGattServerConfirmation) - 1;
+//size_t appCfgGattServerAttributeValueSize   = COUNTOF(appCfgGattServerAttributeValue) - 1;
+//size_t appCfgGattServerUserReadRequestSize  = COUNTOF(appCfgGattServerUserReadRequest) - 1;
+//size_t appCfgGattServerUserWriteRequestSize = COUNTOF(appCfgGattServerUserWriteRequest) - 1;
+//size_t appCfgGattServerCharStatusSize       = COUNTOF(appCfgGattServerCharStatus) - 1;
+//size_t appCfgGattServerConfirmationSize     = COUNTOF(appCfgGattServerConfirmation) - 1;
 
 #define APP_BLE_SYSTEM_ID_SIZE 8
 static uint8_t  systemId[APP_BLE_SYSTEM_ID_SIZE];

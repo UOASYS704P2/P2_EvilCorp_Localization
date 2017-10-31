@@ -44,7 +44,7 @@ extern "C" {
 #define MIN(a, b)                  (((a) < (b)) ? (a) : (b))
 #define MAX(a, b)                  (((a) > (b)) ? (a) : (b))
 
-#define COUNTOF(x)                ((sizeof (x)) / (sizeof ((x)[0])))
+//#define COUNTOF(x)                ((sizeof (x)) / (sizeof ((x)[0])))
 
 #ifdef __cplusplus
 };

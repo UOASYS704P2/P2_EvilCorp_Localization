@@ -5,8 +5,8 @@
   <service advertise="false" name="Generic Access" requirement="mandatory" sourceId="org.bluetooth.service.generic_access" type="primary" uuid="1800">
     <informativeText>Abstract:  The generic_access service contains generic information about the device. All available Characteristics are readonly.  </informativeText>
     
-    <!--Device Name-->
-    <characteristic id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
+    <!--EFR32MG1p132F256GM48-->
+    <characteristic id="device_name" name="EFR32MG1p132F256GM48" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
       <informativeText/>
       <value length="20" type="utf-8" variable_length="true">Awesome Device</value>
       <properties read="true" read_requirement="mandatory" write="true" write_requirement="optional"/>
@@ -259,29 +259,15 @@
     </characteristic>
   </service>
   
-  <!--IMU-->
-  <service advertise="false" name="IMU" requirement="mandatory" type="primary" uuid="a4e649f4-4be5-11e5-885d-feff819cdc9f">
+  <!--LocalisationData-->
+  <service advertise="false" name="LocalisationData" requirement="mandatory" type="primary" uuid="a4e649f4-4be5-11e5-885d-feff819cdc9f">
     <informativeText/>
     
-    <!--Acceleration-->
-    <characteristic id="imu_acceleration" name="Acceleration" uuid="c4c1f6e2-4be5-11e5-885d-feff819cdc9f">
+    <!--OrientationAndCoordinates-->
+    <characteristic id="orientationAndLocation" name="OrientationAndCoordinates" uuid="b7c4b694-bee3-45dd-ba9f-f3b5e994f49a">
       <informativeText/>
-      <value length="6" type="utf-8" variable_length="false"/>
-      <properties notify="true" notify_requirement="optional"/>
-    </characteristic>
-    
-    <!--Orientation-->
-    <characteristic id="imu_orientation" name="Orientation" uuid="b7c4b694-bee3-45dd-ba9f-f3b5e994f49a">
-      <informativeText/>
-      <value length="6" type="utf-8" variable_length="false"/>
-      <properties notify="true" notify_requirement="optional"/>
-    </characteristic>
-    
-    <!--Control Point-->
-    <characteristic id="imu_control_point" name="Control Point" uuid="71e30b8c-4131-4703-b0a0-b0bbba75856b">
-      <informativeText/>
-      <value length="3" type="user" variable_length="false"/>
-      <properties const="false" const_requirement="optional" indicate="true" indicate_requirement="optional" write="true" write_requirement="optional"/>
+      <value length="13" type="user" variable_length="false"/>
+      <properties notify="true" notify_requirement="optional" read="true" read_requirement="optional"/>
     </characteristic>
   </service>
 </gatt>

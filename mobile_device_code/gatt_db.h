@@ -36,8 +36,6 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 #define gattdb_ui_control_point                64
 #define gattdb_aio_digital_in                  68
 #define gattdb_aio_digital_out                 73
-#define gattdb_imu_acceleration                78
-#define gattdb_imu_orientation                 81
-#define gattdb_imu_control_point               84
+#define gattdb_orientationAndLocation          78
 
 #endif
