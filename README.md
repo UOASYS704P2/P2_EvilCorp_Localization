@@ -11,7 +11,7 @@ How it works:
 
 Method 1:
 1)	Executing command:
-git clone https://github.com/UOASYS704P2/ProjectWorkspace.git
+    git clone https://github.com/UOASYS704P2/P2_EvilCorp_Localization_Part1.git
 2)	Launch Simplicity studio v4 and import base_station_code and mobile_device_code.
 
 Method 2:
